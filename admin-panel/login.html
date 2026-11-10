@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1736">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Control Panel · Ebenezer H.S. School</title>
+  <link rel="icon" href="/media/logo">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/login.css">
+  <link rel="stylesheet" href="/admin-assets/admin.css?v=2">
+  <script src="/assets/js/guard.js" defer></script>
+  <script src="/admin-assets/admin-login.js?v=2" defer></script>
+</head>
+<body class="login-page admin">
+  <div class="hero" aria-hidden="true"><div class="hero-glow"></div></div>
+  <main class="login-shell">
+    <section class="login-card" aria-labelledby="admin-title">
+      <div class="crest"><img src="/media/logo" alt="School crest" width="128" height="128" draggable="false"></div>
+      <header class="card-head">
+        <h1 id="admin-title">Admin Control Panel</h1>
+        <p class="place">Ebenezer Higher Secondary School</p>
+        <p class="restricted">Restricted area · Authorised administrators only</p>
+      </header>
+
+      <form id="admin-form" class="login-form" novalidate autocomplete="off">
+        <div class="field">
+          <label for="username">Admin Username</label>
+          <div class="input-wrap">
+            <svg class="i-lead" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+            <input id="username" type="text" maxlength="64" required autocomplete="username" spellcheck="false" autocapitalize="off" placeholder="Enter admin username">
+          </div>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <svg class="i-lead" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <input id="password" type="password" maxlength="128" required autocomplete="current-password" placeholder="Enter password">
+            <button type="button" id="toggle-password" class="toggle-pw" aria-label="Show password" aria-pressed="false">
+              <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-closed" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6C3.9 8.3 2 12 2 12s3.6 7 10 7a10 10 0 0 0 5.4-1.6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="form-error" class="form-error" role="alert" aria-live="assertive" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>
+          <span id="form-error-text"></span>
+        </div>
+        <button type="submit" id="login-btn" class="btn-login">
+          <span class="btn-text" id="login-btn-text">Enter Control Panel</span>
+          <span class="spinner" aria-hidden="true"></span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="secure-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>
+          3 wrong attempts lock this account for 30 minutes
+        </p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

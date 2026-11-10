@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f2557">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Secure login for students, teachers, class teachers, principal and administrative staff of Ebenezer Higher Secondary School, Sabroom.">
+  <title>Login · Ebenezer Higher Secondary School</title>
+  <link rel="icon" href="/media/logo">
+  <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/login.css">
+  <script src="/assets/js/guard.js" defer></script>
+  <script src="/assets/js/login.js" defer></script>
+</head>
+<body class="login-page">
+  <div class="hero" aria-hidden="true">
+    <div class="hero-glow"></div>
+  </div>
+
+  <main class="login-shell">
+    <section class="login-card" aria-labelledby="school-name">
+      <div class="crest">
+        <img src="/media/logo" alt="Ebenezer Higher Secondary School crest" width="128" height="128" draggable="false">
+      </div>
+
+      <header class="card-head">
+        <h1 id="school-name">Ebenezer Higher Secondary School</h1>
+        <p class="place">Sabroom (S), Tripura · Estd. 1983</p>
+        <p class="motto">“Humble, gentle and patient” <span>Eph. 4:2</span></p>
+      </header>
+
+      <form id="login-form" class="login-form" novalidate autocomplete="off">
+        <div class="field">
+          <label for="username" id="username-label">Admission Number</label>
+          <div class="input-wrap">
+            <svg class="i-lead" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+            <input id="username" name="username" type="text" maxlength="64" required
+                   autocomplete="username" spellcheck="false" autocapitalize="off" autocorrect="off"
+                   placeholder="e.g. 123">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password" id="password-label">Date of Birth</label>
+          <div class="input-wrap">
+            <svg class="i-lead" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <input id="password" name="password" type="password" maxlength="128" required
+                   autocomplete="current-password" placeholder="DD-MM-YYYY">
+            <button type="button" id="toggle-password" class="toggle-pw" aria-label="Show password" aria-pressed="false">
+              <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-closed" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6C3.9 8.3 2 12 2 12s3.6 7 10 7a10 10 0 0 0 5.4-1.6"/></svg>
+            </button>
+          </div>
+          <p class="hint" id="password-hint">Your date of birth is your password.</p>
+        </div>
+
+        <fieldset class="roles">
+          <legend>Choose login type</legend>
+          <div class="role-grid">
+            <label class="role" for="role-student">
+              <input type="radio" id="role-student" name="role" value="student" checked>
+              <span class="role-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9.5 12 4.5l10 5-10 5z"/><path d="M6 11.5v4.8c3.3 2.9 8.7 2.9 12 0v-4.8"/><path d="M22 9.5v5.5"/></svg>
+                <span class="role-name">Student</span>
+              </span>
+            </label>
+            <label class="role" for="role-teacher">
+              <input type="radio" id="role-teacher" name="role" value="teacher">
+              <span class="role-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg>
+                <span class="role-name">Teacher</span>
+              </span>
+            </label>
+            <label class="role" for="role-classteacher">
+              <input type="radio" id="role-classteacher" name="role" value="classteacher">
+              <span class="role-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12l2 2 4-4"/><path d="M9 17h6"/></svg>
+                <span class="role-name">Class Teacher</span>
+              </span>
+            </label>
+            <label class="role" for="role-principal">
+              <input type="radio" id="role-principal" name="role" value="principal">
+              <span class="role-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/></svg>
+                <span class="role-name">Principal</span>
+              </span>
+            </label>
+            <label class="role" for="role-administrative">
+              <input type="radio" id="role-administrative" name="role" value="administrative">
+              <span class="role-card">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg>
+                <span class="role-name">Administrative</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div id="form-error" class="form-error" role="alert" aria-live="assertive" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>
+          <span id="form-error-text"></span>
+        </div>
+
+        <button type="submit" id="login-btn" class="btn-login">
+          <span class="btn-text" id="login-btn-text">Login as Student</span>
+          <span class="spinner" aria-hidden="true"></span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+
+        <p class="secure-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>
+          Secure login · Your account is protected
+        </p>
+      </form>
+
+      <footer class="legal">
+        <a href="/legal/terms" id="link-terms">Terms &amp; Conditions</a>
+        <span class="dot" aria-hidden="true"></span>
+        <a href="/legal/privacy" id="link-privacy">Privacy &amp; Policy</a>
+      </footer>
+    </section>
+
+    <p class="copyright">© <span id="year">2026</span> Ebenezer Higher Secondary School. All rights reserved.</p>
+  </main>
+</body>
+</html>

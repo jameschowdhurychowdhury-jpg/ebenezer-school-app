@@ -1,0 +1,24 @@
+{
+  "notices": [
+    {
+      "id": "ntc-welcome-2026",
+      "title": "Welcome to the Official Ebenezer H.S. School App",
+      "body": "All students, teachers, class teachers, principal and administrative staff can now access their dashboards, check official announcements, and communicate securely via the School Group.",
+      "authorRole": "Principal",
+      "authorName": "Dr. Elizabeth Halam (Principal)",
+      "priority": "important",
+      "createdAt": 1794294810523,
+      "readBy": []
+    },
+    {
+      "id": "ntc-exam-schedule",
+      "title": "Term Assessment & Attendance Submission Reminder",
+      "body": "Class Teachers are requested to verify class lists. Students should check the Notices board regularly for upcoming assessment schedules and holiday updates.",
+      "authorRole": "Admin",
+      "authorName": "School Administration",
+      "priority": "normal",
+      "createdAt": 1794327210523,
+      "readBy": []
+    }
+  ]
+}

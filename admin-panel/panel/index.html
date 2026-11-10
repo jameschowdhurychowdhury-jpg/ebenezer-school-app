@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1736">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Control Panel · Ebenezer Higher Secondary School</title>
+  <link rel="icon" href="/media/logo">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/app-shared/shell.css?v=2">
+  <link rel="stylesheet" href="/admin-assets/admin.css?v=2">
+  <script src="/assets/js/guard.js" defer></script>
+  <script src="/app-shared/chat.js?v=2" defer></script>
+  <script src="/admin-assets/admin-login.js?v=2" defer></script>
+</head>
+<body class="dash admin-dash">
+  <div class="dash-frame admin-frame">
+    <!-- Admin Blueprint Header -->
+    <header class="bp-header">
+      <button type="button" class="bp-profile-col" id="admin-profile-btn" title="Admin Profile">
+        <div class="bp-avatar-wrap">
+          <img class="bp-avatar" src="/assets/img/avatar.svg" alt="Admin Profile" width="78" height="78">
+        </div>
+        <span class="bp-profile-label">Profile</span>
+      </button>
+
+      <div class="bp-welcome-col">
+        <h1 class="bp-welcome-title">Welcome Administrative!</h1>
+        <p class="bp-user-name" id="admin-name">Main Admin Control Panel</p>
+        <span class="bp-chat-badge" id="admin-chat-badge">Chat-Room ID: Unknown</span>
+      </div>
+
+      <div class="bp-right-col">
+        <button type="button" class="bp-menu-btn" id="admin-menu-open" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="bp-school-logo">
+          <img src="/media/logo" alt="School Logo" width="74" height="74">
+        </div>
+      </div>
+    </header>
+
+    <!-- 9 Blueprint Icon Buttons -->
+    <main class="bp-main" id="admin-main">
+      <div class="bp-grid" id="admin-grid">
+        <button type="button" class="bp-tile" data-action="publish-notices">
+          <div class="bp-icon-box"><img src="/media/icons/publish-notices.svg" alt="publish Notices"></div>
+          <span class="bp-tile-label">publish Notices</span>
+        </button>
+        <button type="button" class="bp-tile" data-action="chat">
+          <div class="bp-icon-box"><img src="/media/icons/school-group.svg" alt="School Group"></div>
+          <span class="bp-tile-label">School Group</span>
+        </button>
+        <button type="button" class="bp-tile" data-action="calendar">
+          <div class="bp-icon-box"><img src="/media/icons/calendar.svg" alt="Calender"></div>
+          <span class="bp-tile-label">Calender</span>
+        </button>
+        <button type="button" class="bp-tile" data-action="notices">
+          <div class="bp-icon-box">
+            <img src="/media/icons/notices.svg" alt="Notices">
+            <span class="bp-badge" id="admin-notice-badge" hidden>0</span>
+          </div>
+          <span class="bp-tile-label">Notices</span>
+        </button>
+
+        <button type="button" class="bp-tile" data-action="add-teacher">
+          <div class="bp-icon-box"><img src="/media/icons/add-teacher.svg" alt="Add Teacher"></div>
+          <span class="bp-tile-label">Add Teacher</span>
+        </button>
+        <button type="button" class="bp-tile" data-action="add-class-teacher">
+          <div class="bp-icon-box"><img src="/media/icons/add-class-teacher.svg" alt="Add Class-Teacher"></div>
+          <span class="bp-tile-label">Add Class-Teacher</span>
+        </button>
+        <button type="button" class="bp-tile" data-action="add-student">
+          <div class="bp-icon-box"><img src="/media/icons/add-student.svg" alt="Add Student"></div>
+          <span class="bp-tile-label">Add Student</span>
+        </button>
+        <button type="button" class="bp-tile" data-action="student-data">
+          <div class="bp-icon-box"><img src="/media/icons/student-data.svg" alt="Student data"></div>
+          <span class="bp-tile-label">Student data</span>
+        </button>
+
+        <button type="button" class="bp-tile" data-action="teachers-data">
+          <div class="bp-icon-box"><img src="/media/icons/teachers-data.svg" alt="Teachers data"></div>
+          <span class="bp-tile-label">Teachers data</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Subview for forms, live Excel tables, and School Group -->
+    <section class="subview" id="admin-subview" aria-live="polite">
+      <div class="subview-bar">
+        <button type="button" class="subview-back" id="admin-subview-back">← Back to Admin Panel</button>
+        <h2 class="subview-title" id="admin-subview-title">Section</h2>
+      </div>
+      <div class="subview-content" id="admin-subview-content"></div>
+    </section>
+  </div>
+
+  <!-- Slide-out Drawer -->
+  <div class="drawer-backdrop" id="admin-drawer-backdrop"></div>
+  <aside class="drawer" id="admin-drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <img src="/assets/img/avatar.svg" alt="Admin" width="48" height="48">
+      <div class="drawer-head-text">
+        <strong>Super Admin</strong>
+        <small>Chat-Room ID: Unknown</small>
+      </div>
+      <button type="button" class="drawer-close" id="admin-drawer-close" aria-label="Close">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <button type="button" class="drawer-btn" id="admin-menu-profile">Profile</button>
+      <button type="button" class="drawer-btn" id="admin-menu-setting">Setting</button>
+      <button type="button" class="drawer-btn" id="admin-menu-privacy">Privacy &amp; Policy</button>
+      <button type="button" class="drawer-btn" id="admin-menu-terms">Terms &amp; Condition</button>
+      <button type="button" class="drawer-btn danger" id="admin-logout">Logout</button>
+    </nav>
+  </aside>
+
+  <!-- Red Signal Pop-up Modal (for duplicate Admission No / duplicate Chat Reg No) -->
+  <div class="modal-backdrop" id="red-signal-modal" hidden>
+    <div class="modal-card alert-red" role="alertdialog" aria-labelledby="red-signal-title">
+      <h3 id="red-signal-title">🚨 Duplicate Record Alert</h3>
+      <p id="red-signal-msg" style="margin:8px 0 16px;color:#991b1b;font-weight:600;font-size:.9rem;"></p>
+      <button type="button" class="btn-primary" id="red-signal-close" style="background:#dc2626;width:100%;">Understood</button>
+    </div>
+  </div>
+</body>
+</html>

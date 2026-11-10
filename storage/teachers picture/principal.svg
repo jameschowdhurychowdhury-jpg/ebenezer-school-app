@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+    <rect width="120" height="120" rx="60" fill="#7c2d12"/>
+    <circle cx="60" cy="44" r="20" fill="#ffffff" opacity="0.92"/>
+    <path d="M22 108c5-22 20-34 38-34s33 12 38 34z" fill="#ffffff" opacity="0.92"/>
+    <circle cx="60" cy="60" r="56" fill="none" stroke="#f59e0b" stroke-width="4"/>
+    <rect x="34" y="82" width="52" height="22" rx="11" fill="#f59e0b"/>
+    <text x="60" y="97" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="700" font-size="13" fill="#0f2557">EH</text>
+  </svg>

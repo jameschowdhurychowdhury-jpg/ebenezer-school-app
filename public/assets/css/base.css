@@ -1,0 +1,95 @@
+/* =====================================================================
+   Ebenezer H.S. School App — Design System (shared by every page)
+   Colours are taken from the school crest: navy blue, orange ring, candle gold.
+   ===================================================================== */
+
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/poppins-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/poppins-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/poppins-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('../fonts/poppins-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+  /* brand */
+  --navy-950: hsl(224 70% 12%);
+  --navy-900: hsl(224 68% 18%);
+  --navy-800: hsl(223 64% 24%);
+  --navy-700: hsl(223 60% 31%);
+  --navy-500: hsl(223 58% 45%);
+  --navy-100: hsl(223 60% 95%);
+  --orange-600: hsl(28 92% 46%);
+  --orange-500: hsl(31 93% 53%);
+  --orange-400: hsl(34 96% 60%);
+  --orange-50: hsl(34 100% 96%);
+  --gold-400: hsl(42 100% 64%);
+  --cream: hsl(36 45% 95%);
+
+  /* neutrals */
+  --ink-900: hsl(222 28% 14%);
+  --ink-700: hsl(222 16% 32%);
+  --ink-500: hsl(222 10% 48%);
+  --ink-300: hsl(222 14% 78%);
+  --line: hsl(222 24% 90%);
+  --surface: #ffffff;
+  --surface-2: hsl(222 33% 97.5%);
+
+  /* status */
+  --danger-700: hsl(4 72% 40%);
+  --danger-50: hsl(4 100% 97%);
+  --success-600: hsl(152 60% 34%);
+
+  /* shape & depth */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --shadow-sm: 0 1px 2px hsl(224 60% 15% / .06), 0 1px 3px hsl(224 60% 15% / .08);
+  --shadow-md: 0 4px 10px hsl(224 60% 15% / .06), 0 12px 28px hsl(224 60% 15% / .10);
+  --shadow-lg: 0 10px 24px hsl(224 60% 15% / .08), 0 30px 70px hsl(224 60% 15% / .18);
+
+  --ease: cubic-bezier(.22, .8, .24, 1);
+  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink-900);
+  background: var(--cream);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* no text selection / long-press menus (inputs re-enable it below) */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input, textarea, select, button { font: inherit; color: inherit; }
+input, textarea { -webkit-user-select: text; user-select: text; }
+
+img { max-width: 100%; display: block; -webkit-user-drag: none; }
+
+a { color: var(--navy-700); text-decoration: none; }
+
+:focus-visible { outline: 3px solid hsl(223 58% 45% / .45); outline-offset: 2px; border-radius: 6px; }
+
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* subtle paper texture used on large surfaces */
+.texture {
+  background-image:
+    radial-gradient(hsl(224 50% 20% / .035) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

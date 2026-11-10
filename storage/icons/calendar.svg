@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+    <g transform="rotate(-6 44 52)">
+      <rect x="14" y="26" width="56" height="50" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+      <path d="M14 34a8 8 0 0 1 8-8h40a8 8 0 0 1 8 8v8H14z" fill="#2563eb"/>
+      <rect x="24" y="20" width="5" height="12" rx="2.5" fill="#94a3b8"/>
+      <rect x="40" y="20" width="5" height="12" rx="2.5" fill="#94a3b8"/>
+      <rect x="56" y="20" width="5" height="12" rx="2.5" fill="#94a3b8"/>
+      <g fill="#2563eb">
+        <rect x="22" y="48" width="8" height="6" rx="1.5"/><rect x="34" y="48" width="8" height="6" rx="1.5"/><rect x="46" y="48" width="8" height="6" rx="1.5"/><rect x="58" y="48" width="6" height="6" rx="1.5"/>
+        <rect x="22" y="58" width="8" height="6" rx="1.5"/><rect x="46" y="58" width="8" height="6" rx="1.5"/><rect x="58" y="58" width="6" height="6" rx="1.5"/>
+        <rect x="22" y="67" width="8" height="5" rx="1.5"/><rect x="34" y="67" width="8" height="5" rx="1.5"/><rect x="46" y="67" width="8" height="5" rx="1.5"/>
+      </g>
+      <polygon points="38,57 40,61 44,61 41,64 42,68 38,65 34,68 35,64 32,61 36,61" fill="#f59e0b"/>
+    </g>
+    <path d="M68 18c8 0 14 6 14 14v8l4 6H50l4-6v-8c0-8 6-14 14-14z" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
+    <circle cx="68" cy="49" r="4" fill="#92400e"/>
+  </svg>

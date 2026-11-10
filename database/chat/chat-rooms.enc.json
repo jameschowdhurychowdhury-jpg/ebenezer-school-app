@@ -1,0 +1,82 @@
+{
+  "groups": [
+    {
+      "id": "grp-class-10a",
+      "name": "Class 10 - A Official Group",
+      "category": "class",
+      "className": "Class 10",
+      "createdByKey": "teacher:2",
+      "createdByName": "Mrs. Mary Paul (Class Teacher · ID 2)",
+      "createdAt": 1794316414584,
+      "members": [
+        "teacher:2",
+        "principal:Principal",
+        "student:879"
+      ]
+    },
+    {
+      "id": "grp-staff-room",
+      "name": "Teachers & Faculty Room",
+      "category": "staff",
+      "className": "",
+      "createdByKey": "principal:Principal",
+      "createdByName": "Dr. Elizabeth Halam (Principal)",
+      "createdAt": 1794302014584,
+      "members": [
+        "principal:Principal",
+        "administrative:Administrative",
+        "teacher:1",
+        "teacher:2",
+        "teacher:3",
+        "teacher:4"
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-seed-1",
+      "roomId": "grp-class-10a",
+      "senderKey": "teacher:2",
+      "senderChatId": "2",
+      "senderName": "Mrs. Mary Paul",
+      "senderRole": "Class Teacher",
+      "sentAt": 1794320014584,
+      "expiresAt": 1799452800000,
+      "cipher": {
+        "iv": "IUayQaXpbzxRBoaJ",
+        "tag": "ZRVcAamv047VpcPySd3jJQ==",
+        "data": "zmukLuCpO7+/ce9Pcbh7bU/b9wMd5p6iVo3GhDJZhpmMrhYGIogVn7cQl8CtxVTDL6N7zOfdAKwcuCwaYZie4rbbfe7bX6ZFXI5zCEMKE4aJxiZ7nkti/46/GoYvccjT5hBDlWzu7NWBH+qiQ2JTPLd5c4JeDbmWH6YHNOF9Bdv+rK+NXaPvmX5RtFwr+NrBYuezPr/LTvJA+mBNOKDxfw=="
+      }
+    },
+    {
+      "id": "msg-seed-2",
+      "roomId": "grp-staff-room",
+      "senderKey": "principal:Principal",
+      "senderChatId": "Principal",
+      "senderName": "Dr. Elizabeth Halam",
+      "senderRole": "Principal",
+      "sentAt": 1794323614584,
+      "expiresAt": 1799452800000,
+      "cipher": {
+        "iv": "8kKZxj5sG1/9Vzcb",
+        "tag": "PH2ZX4PIdF/LqLGj31ufJw==",
+        "data": "V8yavpkoVo2xcb+UYrKrrAMqAfeyRa3cnvnyiBOrQWy6iH1MX/VYdHxp4AE0DOEh+I0Vm116WxeaCsMB6lCL4/a6d6HVBkH9yAji/+86/PtUQbAYSug7L46sHqkm8HCly4xCyqbmMldLVnsT+ZlVd6kMolz/W2GFx6WZFBachLvLskI844qfOFxkcWI="
+      }
+    },
+    {
+      "id": "msg-60ceaf5429e2f88f",
+      "roomId": "dm__principal:Principal__student:123",
+      "senderKey": "student:123",
+      "senderChatId": "123",
+      "senderName": "Ananya Saha",
+      "senderRole": "Student",
+      "sentAt": 1794338025671,
+      "expiresAt": 1799452800000,
+      "cipher": {
+        "iv": "8yzHaheCAnqkJT/E",
+        "tag": "n5Pt2jhrDMMXtV5X27DDeg==",
+        "data": "7sx43752U6JKnZrpAmOREyYavQkZDp2uIMrWaNZpGukKGRXXdIBe0CeP4w=="
+      }
+    }
+  ]
+}
