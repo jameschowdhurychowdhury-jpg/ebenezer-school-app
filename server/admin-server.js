@@ -1,7 +1,4 @@
 'use strict';
-/**
- * ADMIN PANEL – Express sub-app for the school administrative dashboard.
- */
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -15,7 +12,7 @@ const { paths } = config;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function ipAllowList(req, res, next) {
-  if (!config.ADMIN_ALLOWED_IPS || !config.ADMIN_ALLOWED_IPS.length) return next();
+  if (!config.ADMIN_ALLOWED_IPS.length) return next();
   const ip = (req.ip || '').replace(/^::ffff:/, '');
   if (config.ADMIN_ALLOWED_IPS.includes(ip)) return next();
   return res.status(404).end();
@@ -25,10 +22,10 @@ function createAdminApp() {
   const app = express();
   const sessions = new SessionStore({
     cookieName: 'ehs_admin_sid',
-    idleMs: config.ADMIN_SESSION ? config.ADMIN_SESSION.IDLE_MS : 30 * 60 * 1000,
-    maxMs: config.ADMIN_SESSION ? config.ADMIN_SESSION.MAX_MS : 8 * 60 * 60 * 1000,
+    idleMs: config.ADMIN_SESSION.IDLE_MS,
+    maxMs: config.ADMIN_SESSION.MAX_MS,
   });
-  const lockout = new Lockout({ maxFails: 5, lockMs: 15 * 60 * 1000 });
+  const lockout = new Lockout({ maxFails: 3, lockMs: 30 * 60 * 1000 });
 
   app.disable('x-powered-by');
   app.set('trust proxy', 1);
@@ -36,26 +33,20 @@ function createAdminApp() {
   app.use(mw.securityHeaders());
   app.use(cookieParser());
   app.use(express.json({ limit: '512kb' }));
-  app.use(express.urlencoded({ extended: true, limit: '512kb' }));
   app.use(mw.loadSession(sessions));
 
-  // Static Assets for Admin
   app.use('/assets', mw.noStore, express.static(path.join(paths.publicDir, 'assets'), { dotfiles: 'deny', index: false }));
   app.use('/admin-assets', mw.noStore, express.static(path.join(paths.adminDir, 'assets'), { dotfiles: 'deny', index: false }));
-  if (paths.mediaDir) {
-    app.use('/media', require('./routes/media')());
-  }
-
+  app.use('/media', require('./routes/media')());
   app.get('/legal/privacy', (_req, res) => res.sendFile(path.join(paths.publicDir, 'legal', 'privacy.html')));
   app.get('/legal/terms', (_req, res) => res.sendFile(path.join(paths.publicDir, 'legal', 'terms.html')));
 
-  // Admin API Sub-Router
   const api = express.Router();
-  api.use(mw.noStore);
+  api.use(mw.noStore, mw.sameOriginOnly, mw.jsonOnly);
 
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    limit: 20,
+    limit: 10,
     standardHeaders: 'draft-7',
     legacyHeaders: false,
     message: { ok: false, error: 'Too many attempts. Please wait 15 minutes.' },
@@ -64,50 +55,30 @@ function createAdminApp() {
   api.post('/login', limiter, async (req, res, next) => {
     try {
       const { username, password } = req.body || {};
-      if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
-        return res.status(400).json({ ok: false, error: 'Please enter both username and password.' });
+      if (typeof username !== 'string' || typeof password !== 'string' || !username.trim() || !password ||
+          username.length > 64 || password.length > 128) {
+        return res.status(400).json({ ok: false, error: 'Please fill in all fields.' });
       }
-
       const key = username.trim().toLowerCase();
       const left = lockout.remainingMs(key);
       if (left > 0) {
         return res.status(429).json({ ok: false, error: `Locked. Try again in ${Math.ceil(left / 60000)} minute(s).` });
       }
-
-      // Check database credentials
-      let a = await db.findAdminByUsername(username.trim());
-
-      // If user is superadmin or admin, allow both DB check and master fallback
-      let isValid = false;
-      if (a && db.isActive(a)) {
-        isValid = await verifyPassword(password, a.Password);
-      }
-
-      // Security Fallback: allow verified credentials for superadmin / master password
-      if (!isValid && (key === 'superadmin' || key === 'admin') && password === 'EHSS#Admin2026') {
-        isValid = true;
-        if (!a) {
-          a = { Name: 'Super Admin', 'Chat ID': 'Admin', Username: 'superadmin' };
-        }
-      }
-
-      if (!isValid) {
+      const a = await db.findAdminByUsername(username);
+      const ok = await verifyPassword(password, a ? a.Password : null);
+      if (!a || !ok || !db.isActive(a)) {
         lockout.fail(key);
-        await sleep(300 + Math.floor(Math.random() * 200));
+        await sleep(400 + Math.floor(Math.random() * 400));
         return res.status(401).json({ ok: false, error: 'Invalid admin credentials.' });
       }
-
       lockout.clear(key);
       sessions.create(req, res, {
         uid: 'admin',
         role: 'admin',
-        id: a['Chat ID'] || 'Admin',
+        id: a['Chat ID'] || 'Unknown',
         name: a.Name || 'Admin',
       });
-
-      // Works cleanly whether mounted at / or under /admin
-      const redirectPath = req.baseUrl ? `${req.baseUrl}/panel/` : '/panel/';
-      return res.json({ ok: true, redirect: redirectPath });
+      return res.json({ ok: true, redirect: '/panel/' });
     } catch (err) {
       return next(err);
     }
@@ -115,36 +86,29 @@ function createAdminApp() {
 
   api.post('/logout', (req, res) => {
     sessions.destroy(req, res);
-    const redirectPath = req.baseUrl ? `${req.baseUrl}/` : '/';
-    res.json({ ok: true, redirect: redirectPath });
+    res.json({ ok: true, redirect: '/' });
   });
 
   api.get('/me', mw.requireApiRole(['admin']), (req, res) => {
     res.json({ ok: true, name: req.session.user.name, chatId: req.session.user.id, role: 'admin' });
   });
 
-  // Data routes: Notices, Chat, Admin APIs
   api.use('/notices', require('./routes/notices')());
   api.use('/chat', require('./routes/chat')());
   api.use('/admin', require('./routes/admin-api')());
 
-  api.use((_req, res) => res.status(404).json({ ok: false, error: 'API route not found.' }));
+  api.use((_req, res) => res.status(404).json({ ok: false, error: 'Not found.' }));
   app.use('/api', api);
 
-  // Front-end Views
   app.get('/', mw.noStore, (req, res) => {
-    if (req.session && req.session.user && req.session.user.role === 'admin') {
-      const redirectPath = req.baseUrl ? `${req.baseUrl}/panel/` : '/panel/';
-      return res.redirect(302, redirectPath);
-    }
+    if (req.session) return res.redirect(302, '/panel/');
     return res.sendFile(path.join(paths.adminDir, 'login.html'));
   });
 
   app.all('/logout', mw.noStore, (req, res) => {
     sessions.destroy(req, res);
     res.set('Clear-Site-Data', '"cache"');
-    const redirectPath = req.baseUrl ? `${req.baseUrl}/` : '/';
-    return res.redirect(302, redirectPath);
+    return res.redirect(302, '/');
   });
 
   app.use(
@@ -152,7 +116,6 @@ function createAdminApp() {
     mw.requirePageRole(['admin']),
     express.static(path.join(paths.adminDir, 'panel'), { dotfiles: 'deny', extensions: ['html'] }),
   );
-
   app.use(
     '/app-shared',
     mw.requirePageRole(['admin']),
@@ -160,8 +123,6 @@ function createAdminApp() {
   );
 
   app.use((_req, res) => res.status(404).sendFile(path.join(paths.publicDir, '404.html')));
-
-  // Error handler
   // eslint-disable-next-line no-unused-vars
   app.use((err, _req, res, _next) => {
     console.error('[admin] error:', err && err.message);
